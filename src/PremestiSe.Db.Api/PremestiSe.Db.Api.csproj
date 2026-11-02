@@ -1,0 +1,7 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <ProjectReference Include="../PremestiSe.Db.Model/PremestiSe.Db.Model.csproj" />
+    <ProjectReference Include="../PremestiSe.Db.Contracts/PremestiSe.Db.Contracts.csproj" />
+    <ProjectReference Include="../PremestiSe.Domain/PremestiSe.Domain.csproj" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Database": { "SystemDatabasePath": "/var/lib/veloxdb/system" },
+  "Logging": { "Path": "/var/log/veloxdb", "Level": "Info", "UserLevel": "None" },
+  "Replication": {
+    "ThisNodeName": "Node",
+    "ClusterConfigFile": "${Base}/config.cluster.json",
+    "PrimaryWorkerCount": 2,
+    "StandbyWorkerCount": 0
+  }
+}

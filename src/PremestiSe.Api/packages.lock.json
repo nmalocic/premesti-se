@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "dependencies": {
+    "net8.0": {
+      "VeloxDB.Protocol": {
+        "type": "Transitive",
+        "resolved": "0.4.0",
+        "contentHash": "cqHTMbuGQczdFnM4ViV4LfpCMOfTru6AiPNkrQwxi4BP0n80DfUnX1566czK2X17jA6LqZG4sjocIvtgpYDeMA=="
+      },
+      "premestise.db.contracts": {
+        "type": "Project",
+        "dependencies": {
+          "VeloxDB.Protocol": "[0.4.0, )"
+        }
+      },
+      "premestise.domain": {
+        "type": "Project"
+      }
+    }
+  }
+}

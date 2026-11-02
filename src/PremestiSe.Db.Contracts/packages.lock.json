@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "dependencies": {
+    "net8.0": {
+      "VeloxDB.Protocol": {
+        "type": "Direct",
+        "requested": "[0.4.0, )",
+        "resolved": "0.4.0",
+        "contentHash": "cqHTMbuGQczdFnM4ViV4LfpCMOfTru6AiPNkrQwxi4BP0n80DfUnX1566czK2X17jA6LqZG4sjocIvtgpYDeMA=="
+      }
+    }
+  }
+}
