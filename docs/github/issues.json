@@ -1,0 +1,838 @@
+{
+  "epics": [
+    {
+      "key": "EPIC 0",
+      "title": "Foundations & DevOps"
+    },
+    {
+      "key": "EPIC 1",
+      "title": "Kindergarten registry (data import)"
+    },
+    {
+      "key": "EPIC 2",
+      "title": "Submit request"
+    },
+    {
+      "key": "EPIC 3",
+      "title": "Email verification"
+    },
+    {
+      "key": "EPIC 4",
+      "title": "Matching engine"
+    },
+    {
+      "key": "EPIC 5",
+      "title": "Match lifecycle & notifications"
+    },
+    {
+      "key": "EPIC 6",
+      "title": "Manage my request"
+    },
+    {
+      "key": "EPIC 7",
+      "title": "Interactive map"
+    },
+    {
+      "key": "EPIC 8",
+      "title": "Frontend shell, i18n, accessibility"
+    },
+    {
+      "key": "EPIC 9",
+      "title": "Security, privacy & compliance"
+    },
+    {
+      "key": "EPIC 10",
+      "title": "Operations / admin"
+    }
+  ],
+  "issues": [
+    {
+      "id": "PS-S1",
+      "title": "[PS-S1] Spike: VeloxDB proof of concept",
+      "epic": "Spikes",
+      "labels": [
+        "spike",
+        "priority:P0",
+        "release:v1"
+      ],
+      "milestone": "v1",
+      "body": "**Spike**\n\nVeloxDB proof of concept: model, DbAPI operation, hosting in Docker, backup and restore\n\n**Expected output:** A working sample and an ADR\n\n---\n_Source: docs/user-stories.md_"
+    },
+    {
+      "id": "PS-S2",
+      "title": "[PS-S2] Spike: Geocoding provider comparison",
+      "epic": "Spikes",
+      "labels": [
+        "spike",
+        "priority:P0",
+        "release:v1"
+      ],
+      "milestone": "v1",
+      "body": "**Spike**\n\nGeocoding provider comparison (Nominatim vs paid) on 100 sample addresses\n\n**Expected output:** Accuracy report and a choice\n\n---\n_Source: docs/user-stories.md_"
+    },
+    {
+      "id": "PS-S3",
+      "title": "[PS-S3] Spike: Resolve remaining product decisions (Q2, Q4, Q7–Q10)",
+      "epic": "Spikes",
+      "labels": [
+        "spike",
+        "priority:P0",
+        "release:v1"
+      ],
+      "milestone": "v1",
+      "body": "**Spike**\n\nRemaining product decisions Q2, Q4, Q7–Q10 from `architecture.md` §11. Q1, Q3, Q5, and Q6 are already decided\n\n**Expected output:** Signed-off answers\n\n---\n_Source: docs/user-stories.md_"
+    },
+    {
+      "id": "PS-S4",
+      "title": "[PS-S4] Spike: Email provider choice and domain setup",
+      "epic": "Spikes",
+      "labels": [
+        "spike",
+        "priority:P0",
+        "release:v1"
+      ],
+      "milestone": "v1",
+      "body": "**Spike**\n\nEmail provider choice and domain setup\n\n**Expected output:** Provider and DNS records\n\n---\n_Source: docs/user-stories.md_"
+    },
+    {
+      "id": "PS-S5",
+      "title": "[PS-S5] Spike: Verify missing Belgrade municipalities (Grocka, Savski Venac)",
+      "epic": "Spikes",
+      "labels": [
+        "spike",
+        "priority:P0",
+        "release:v1"
+      ],
+      "milestone": "v1",
+      "body": "**Spike**\n\nCheck whether the missing Belgrade municipalities (Grocka, Savski Venac) are a gap in the source data\n\n**Expected output:** A data fix or confirmation\n\n---\n_Source: docs/user-stories.md_"
+    },
+    {
+      "id": "PS-001",
+      "title": "[PS-001] Solution scaffolding",
+      "epic": "EPIC 0: Foundations & DevOps",
+      "labels": [
+        "user-story",
+        "priority:P0",
+        "release:v1",
+        "size:M",
+        "epic:0"
+      ],
+      "milestone": "v1",
+      "body": "**Epic:** EPIC 0: Foundations & DevOps  \n**Priority:** P0 · **Release:** v1 · **Size:** M\n\n*As a developer, I want a working skeleton of the solution so that the team can build features in parallel.*\n- Create the .NET solution with the projects `Api`, `Domain`, `Db.Model`, `Db.Api`, `Db.Contracts`, `Importer`, and test projects. Create the React (Vite + TS) app in `/web`.\n- Add `docker-compose` with the API, a VeloxDB server, and Mailpit (dev SMTP).\n- **AC:** `docker compose up` starts everything. `GET /api/health` returns 200 including the DB check. The SPA loads and calls the API.\n\n---\n_Source: docs/user-stories.md · Architecture: docs/architecture.md_"
+    },
+    {
+      "id": "PS-002",
+      "title": "[PS-002] CI pipeline",
+      "epic": "EPIC 0: Foundations & DevOps",
+      "labels": [
+        "user-story",
+        "priority:P0",
+        "release:v1",
+        "size:M",
+        "epic:0"
+      ],
+      "milestone": "v1",
+      "body": "**Epic:** EPIC 0: Foundations & DevOps  \n**Priority:** P0 · **Release:** v1 · **Size:** M\n\n*As a developer, I want CI on every PR so that regressions are caught early.*\n- **AC:** the pipeline builds .NET and web, runs unit tests, lint/format checks (dotnet format, ESLint, Prettier), and publishes artifacts. Merges are blocked on failure.\n\n---\n_Source: docs/user-stories.md · Architecture: docs/architecture.md_"
+    },
+    {
+      "id": "PS-003",
+      "title": "[PS-003] CD to staging & prod",
+      "epic": "EPIC 0: Foundations & DevOps",
+      "labels": [
+        "user-story",
+        "priority:P1",
+        "release:v1",
+        "size:L",
+        "epic:0"
+      ],
+      "milestone": "v1",
+      "body": "**Epic:** EPIC 0: Foundations & DevOps  \n**Priority:** P1 · **Release:** v1 · **Size:** L\n\n- **AC:** deploying to staging is automatic on main. Production deploys on a tag or manual approval. VeloxDB model/API assemblies are deployed as part of the pipeline. Secrets come from a vault or the environment.\n\n---\n_Source: docs/user-stories.md · Architecture: docs/architecture.md_"
+    },
+    {
+      "id": "PS-004",
+      "title": "[PS-004] Observability baseline",
+      "epic": "EPIC 0: Foundations & DevOps",
+      "labels": [
+        "user-story",
+        "priority:P1",
+        "release:v1",
+        "size:M",
+        "epic:0"
+      ],
+      "milestone": "v1",
+      "body": "**Epic:** EPIC 0: Foundations & DevOps  \n**Priority:** P1 · **Release:** v1 · **Size:** M\n\n- **AC:** Serilog structured logs, OpenTelemetry traces and metrics, and a dashboard showing request rate, errors, outbox backlog, and match count. An alert fires when the outbox backlog stays above 50 for more than 10 minutes.\n\n---\n_Source: docs/user-stories.md · Architecture: docs/architecture.md_"
+    },
+    {
+      "id": "PS-005",
+      "title": "[PS-005] VeloxDB persistence & backup",
+      "epic": "EPIC 0: Foundations & DevOps",
+      "labels": [
+        "user-story",
+        "priority:P0",
+        "release:v1",
+        "size:M",
+        "epic:0"
+      ],
+      "milestone": "v1",
+      "body": "**Epic:** EPIC 0: Foundations & DevOps  \n**Priority:** P0 · **Release:** v1 · **Size:** M\n\n*As an operator, I want durable storage and backups so that no requests are lost.*\n- **AC:** persistence log and snapshot directories sit on persistent volumes. A nightly backup runs. A restore procedure is documented and tested once. A standby/replica is configured for prod.\n\n---\n_Source: docs/user-stories.md · Architecture: docs/architecture.md_"
+    },
+    {
+      "id": "PS-010",
+      "title": "[PS-010] Import kindergartens from xlsx",
+      "epic": "EPIC 1: Kindergarten registry (data import)",
+      "labels": [
+        "user-story",
+        "priority:P0",
+        "release:v1",
+        "size:L",
+        "epic:1"
+      ],
+      "milestone": "v1",
+      "body": "**Epic:** EPIC 1: Kindergarten registry (data import)  \n**Priority:** P0 · **Release:** v1 · **Size:** L\n\n*As an operator, I want to import the official kindergarten list so that parents can pick their current and desired kindergarten.*\n- Source: the master sheet `obdanista_csv_cyrillic` only.\n- **AC:**\n  - Given the xlsx, when the importer runs, then Regions (`uprava`), Cities, Municipalities (`opstina`), Institutions (`ustanova`), and Kindergartens are upserted.\n  - Exact duplicate rows are collapsed. The current file has 3,602 rows → **1,802 unique**.\n  - **Kosovo is excluded:** rows whose `uprava` is `Ранилуг` or `Косовска Митровица` (53 unique locations) are skipped, using the config list `Import:ExcludedRegions`. Expected result: **1,748 kindergartens**. Previously imported records from excluded regions are deactivated.\n  - **Belgrade is grouped:** all 15 `Београд - *` municipalities map to one City, \"Београд\", and each kindergarten keeps its Municipality. The grouping comes from the config `Import:CityGroups`.\n  - Numeric fields are normalized (`83.0` → `83`, `11460.0` → `11460`).\n  - Malformed rows (for example a header merged into data, or `tip_lokacije` containing `управа`) are rejected and listed in an import report.\n  - Re-running the importer is idempotent, because a stable `ExternalKey` hash means nothing is duplicated.\n  - Kindergartens missing from a newer file are marked `IsActive = false`, not deleted.\n\n---\n_Source: docs/user-stories.md · Architecture: docs/architecture.md_"
+    },
+    {
+      "id": "PS-011",
+      "title": "[PS-011] Latin transliteration for search",
+      "epic": "EPIC 1: Kindergarten registry (data import)",
+      "labels": [
+        "user-story",
+        "priority:P1",
+        "release:v1",
+        "size:S",
+        "epic:1"
+      ],
+      "milestone": "v1",
+      "body": "**Epic:** EPIC 1: Kindergarten registry (data import)  \n**Priority:** P1 · **Release:** v1 · **Size:** S\n\n*As a parent who types in Latin script, I want to find \"Novi Sad\" and \"Poletarac\" so that I don't have to switch keyboards.*\n- **AC:** every Region, City, Institution, and Kindergarten name has a generated `NameLat`. Search matches both scripts and ignores diacritics (`c`/`č`/`ć`).\n\n---\n_Source: docs/user-stories.md · Architecture: docs/architecture.md_"
+    },
+    {
+      "id": "PS-012",
+      "title": "[PS-012] Geocode kindergartens",
+      "epic": "EPIC 1: Kindergarten registry (data import)",
+      "labels": [
+        "user-story",
+        "priority:P0",
+        "release:v1",
+        "size:L",
+        "epic:1"
+      ],
+      "milestone": "v1",
+      "body": "**Epic:** EPIC 1: Kindergarten registry (data import)  \n**Priority:** P0 · **Release:** v1 · **Size:** L\n\n*As a parent, I want kindergartens shown at their real location on the map so that I can judge distance.*\n- **AC:**\n  - Each kindergarten gets `Lat`/`Lng` and `GeoPrecision` (`address` | `street` | `settlement`).\n  - Rows with `/` or `бб` fall back to geocoding the settlement, plus the street when present.\n  - Results are cached in a versioned file, so re-imports don't call the geocoder again.\n  - The geocoder rate limits are respected (Nominatim allows 1 request/s).\n  - A report lists low-precision results for manual review.\n\n---\n_Source: docs/user-stories.md · Architecture: docs/architecture.md_"
+    },
+    {
+      "id": "PS-013",
+      "title": "[PS-013] Manual coordinate override",
+      "epic": "EPIC 1: Kindergarten registry (data import)",
+      "labels": [
+        "user-story",
+        "priority:P2",
+        "release:v1",
+        "size:S",
+        "epic:1"
+      ],
+      "milestone": "v1",
+      "body": "**Epic:** EPIC 1: Kindergarten registry (data import)  \n**Priority:** P2 · **Release:** v1 · **Size:** S\n\n- **AC:** an operator can set coordinates for a kindergarten through a CSV or the admin CLI. Overrides survive re-imports.\n\n---\n_Source: docs/user-stories.md · Architecture: docs/architecture.md_"
+    },
+    {
+      "id": "PS-020",
+      "title": "[PS-020] Choose city",
+      "epic": "EPIC 2: Submit request",
+      "labels": [
+        "user-story",
+        "priority:P0",
+        "release:v1",
+        "size:S",
+        "epic:2"
+      ],
+      "milestone": "v1",
+      "body": "**Epic:** EPIC 2: Submit request  \n**Priority:** P0 · **Release:** v1 · **Size:** S\n\n*As a parent, I want to pick my city first so that I only see relevant kindergartens.*\n- **AC:**\n  - A searchable dropdown of cities (municipalities). Belgrade appears once, as \"Београд / Beograd\".\n  - Picking a city loads its kindergartens and centres the map on it.\n  - For Belgrade, the kindergarten picker shows the municipality next to each name (for example \"Пчелица — Земун\") and offers an optional municipality filter.\n  - Kosovo municipalities are not listed.\n\n---\n_Source: docs/user-stories.md · Architecture: docs/architecture.md_"
+    },
+    {
+      "id": "PS-021",
+      "title": "[PS-021] Choose current and desired kindergarten",
+      "epic": "EPIC 2: Submit request",
+      "labels": [
+        "user-story",
+        "priority:P0",
+        "release:v1",
+        "size:M",
+        "epic:2"
+      ],
+      "milestone": "v1",
+      "body": "**Epic:** EPIC 2: Submit request  \n**Priority:** P0 · **Release:** v1 · **Size:** M\n\n*As a parent, I want to select my child's current kindergarten and the one I want so that the system can find a swap.*\n- **AC:**\n  - Both pickers are searchable and show the name, institution, and address.\n  - The current and desired kindergarten cannot be the same (validation error).\n  - Both must belong to the selected city (while `SameCityOnly` is on). In Belgrade, they can be in different municipalities.\n\n---\n_Source: docs/user-stories.md · Architecture: docs/architecture.md_"
+    },
+    {
+      "id": "PS-022",
+      "title": "[PS-022] Enter contact details",
+      "epic": "EPIC 2: Submit request",
+      "labels": [
+        "user-story",
+        "priority:P0",
+        "release:v1",
+        "size:S",
+        "epic:2"
+      ],
+      "milestone": "v1",
+      "body": "**Epic:** EPIC 2: Submit request  \n**Priority:** P0 · **Release:** v1 · **Size:** S\n\n*As a parent, I want to enter my name, email, and phone so that matched parents can contact me.*\n- **AC:** all fields are required. Email has RFC-valid syntax and is normalized to lower case. The phone is validated and stored in E.164 format (default `+381`). Client and server run the same validation and return field-level errors.\n\n---\n_Source: docs/user-stories.md · Architecture: docs/architecture.md_"
+    },
+    {
+      "id": "PS-023",
+      "title": "[PS-023] Child age group",
+      "epic": "EPIC 2: Submit request",
+      "labels": [
+        "user-story",
+        "priority:P0",
+        "release:v1",
+        "size:S",
+        "epic:2"
+      ],
+      "milestone": "v1",
+      "body": "**Epic:** EPIC 2: Submit request  \n**Priority:** P0 · **Release:** v1 · **Size:** S\n\n*As a parent, I want to state my child's age group so that I'm only matched with compatible swaps.*\n- **AC:**\n  - A required select (jaslice, mlađa, srednja, starija, predškolska), with a short hint about the age range of each group.\n  - The value is stored on the request and can be edited while the request is `Active` (PS-061). Editing it triggers re-matching.\n  - The matcher **never** combines requests from different age groups. This is a hard rule, not a config option.\n\n---\n_Source: docs/user-stories.md · Architecture: docs/architecture.md_"
+    },
+    {
+      "id": "PS-024",
+      "title": "[PS-024] Consent & privacy notice",
+      "epic": "EPIC 2: Submit request",
+      "labels": [
+        "user-story",
+        "priority:P0",
+        "release:v1",
+        "size:S",
+        "epic:2"
+      ],
+      "milestone": "v1",
+      "body": "**Epic:** EPIC 2: Submit request  \n**Priority:** P0 · **Release:** v1 · **Size:** S\n\n*As a parent, I want to understand how my data is used so that I can give informed consent.*\n- **AC:** the consent checkbox is required. It says that contact details are shared **only with matched participants**, and links to the privacy policy. The consent timestamp and policy version are stored.\n\n---\n_Source: docs/user-stories.md · Architecture: docs/architecture.md_"
+    },
+    {
+      "id": "PS-025",
+      "title": "[PS-025] Submit creates a Pending Request",
+      "epic": "EPIC 2: Submit request",
+      "labels": [
+        "user-story",
+        "priority:P0",
+        "release:v1",
+        "size:M",
+        "epic:2"
+      ],
+      "milestone": "v1",
+      "body": "**Epic:** EPIC 2: Submit request  \n**Priority:** P0 · **Release:** v1 · **Size:** M\n\n*As a parent, I want my submission saved until I confirm my email so that fake emails can't create requests.*\n- **AC:**\n  - When the form is valid and the CAPTCHA passes, a `PendingRequest` is created with a hashed 256-bit token that expires after 24h, and a confirmation email is enqueued.\n  - The response is 202, and the UI shows \"Check your email\" with a resend option.\n  - If the email already has an active request, then no new pending request is created, and the parent gets an email with their manage link.\n\n---\n_Source: docs/user-stories.md · Architecture: docs/architecture.md_"
+    },
+    {
+      "id": "PS-026",
+      "title": "[PS-026] Anti-abuse on submit",
+      "epic": "EPIC 2: Submit request",
+      "labels": [
+        "user-story",
+        "priority:P0",
+        "release:v1",
+        "size:M",
+        "epic:2"
+      ],
+      "milestone": "v1",
+      "body": "**Epic:** EPIC 2: Submit request  \n**Priority:** P0 · **Release:** v1 · **Size:** M\n\n- **AC:** CAPTCHA (Turnstile/hCaptcha) is verified server-side. Rate limits are 5 submits per IP per hour and 3 per email per day. Going over the limit returns 429 with a friendly message.\n\n---\n_Source: docs/user-stories.md · Architecture: docs/architecture.md_"
+    },
+    {
+      "id": "PS-027",
+      "title": "[PS-027] Multiple destination kindergartens",
+      "epic": "EPIC 2: Submit request",
+      "labels": [
+        "user-story",
+        "priority:P1",
+        "release:v2",
+        "size:L",
+        "epic:2"
+      ],
+      "milestone": "v2",
+      "body": "**Epic:** EPIC 2: Submit request  \n**Priority:** P1 · **Release:** v2 · **Size:** L\n\n*As a parent, I want to list several acceptable kindergartens in order of preference so that I have a better chance of a match.*\n- **AC:** up to N destinations (config, default 5), ordered by priority. Each becomes a graph edge. When the matcher has several cycles of equal length, it prefers the higher-priority destination. When a request is matched, all of its edges are reserved.\n\n---\n_Source: docs/user-stories.md · Architecture: docs/architecture.md_"
+    },
+    {
+      "id": "PS-030",
+      "title": "[PS-030] Confirmation email with magic link",
+      "epic": "EPIC 3: Email verification",
+      "labels": [
+        "user-story",
+        "priority:P0",
+        "release:v1",
+        "size:M",
+        "epic:3"
+      ],
+      "milestone": "v1",
+      "body": "**Epic:** EPIC 3: Email verification  \n**Priority:** P0 · **Release:** v1 · **Size:** M\n\n*As a parent, I want to confirm my request with one click so that it becomes active.*\n- **AC:**\n  - The email (sr-Cyrl/sr-Latn and plain text) has a link to `/confirm?token=…` and a 6-digit fallback code.\n  - The landing page sends a **POST** to confirm, so link pre-fetchers can't activate it.\n  - A valid, unexpired token moves the PendingRequest to a `Request[Active]`, deletes the pending row, and triggers matching.\n  - Expired or used tokens show a clear message with a \"resend\" button.\n\n---\n_Source: docs/user-stories.md · Architecture: docs/architecture.md_"
+    },
+    {
+      "id": "PS-031",
+      "title": "[PS-031] Resend confirmation",
+      "epic": "EPIC 3: Email verification",
+      "labels": [
+        "user-story",
+        "priority:P1",
+        "release:v1",
+        "size:S",
+        "epic:3"
+      ],
+      "milestone": "v1",
+      "body": "**Epic:** EPIC 3: Email verification  \n**Priority:** P1 · **Release:** v1 · **Size:** S\n\n- **AC:** resending invalidates the previous token. It is limited to 3 per hour per email.\n\n---\n_Source: docs/user-stories.md · Architecture: docs/architecture.md_"
+    },
+    {
+      "id": "PS-032",
+      "title": "[PS-032] Clean up unconfirmed requests",
+      "epic": "EPIC 3: Email verification",
+      "labels": [
+        "user-story",
+        "priority:P1",
+        "release:v1",
+        "size:S",
+        "epic:3"
+      ],
+      "milestone": "v1",
+      "body": "**Epic:** EPIC 3: Email verification  \n**Priority:** P1 · **Release:** v1 · **Size:** S\n\n- **AC:** a job runs hourly and deletes PendingRequests older than 24h, including their personal data.\n\n---\n_Source: docs/user-stories.md · Architecture: docs/architecture.md_"
+    },
+    {
+      "id": "PS-033",
+      "title": "[PS-033] Phone verification (SMS OTP)",
+      "epic": "EPIC 3: Email verification",
+      "labels": [
+        "user-story",
+        "priority:P2",
+        "release:v2",
+        "size:M",
+        "epic:3"
+      ],
+      "milestone": "v2",
+      "body": "**Epic:** EPIC 3: Email verification  \n**Priority:** P2 · **Release:** v2 · **Size:** M\n\n*As the platform, I want verified phone numbers so that matched parents can trust each other's contact details.*\n- **AC:** an SMS with a 6-digit code (valid 10 minutes, 5 attempts). The request shows a \"phone verified\" badge. Matching can require verified phones (config).\n\n---\n_Source: docs/user-stories.md · Architecture: docs/architecture.md_"
+    },
+    {
+      "id": "PS-034",
+      "title": "[PS-034] Additional KYC options",
+      "epic": "EPIC 3: Email verification",
+      "labels": [
+        "user-story",
+        "priority:P2",
+        "release:v2",
+        "size:L",
+        "epic:3"
+      ],
+      "milestone": "v2",
+      "body": "**Epic:** EPIC 3: Email verification  \n**Priority:** P2 · **Release:** v2 · **Size:** L\n\n- Spike: evaluate eUprava eID / ConsentID, or proof of enrolment (for example an uploaded PU confirmation), against the privacy cost.\n- **AC:** a decision record with a recommended approach.\n\n---\n_Source: docs/user-stories.md · Architecture: docs/architecture.md_"
+    },
+    {
+      "id": "PS-040",
+      "title": "[PS-040] Direct swap matching (2-cycle)",
+      "epic": "EPIC 4: Matching engine",
+      "labels": [
+        "user-story",
+        "priority:P0",
+        "release:v1",
+        "size:M",
+        "epic:4"
+      ],
+      "milestone": "v1",
+      "body": "**Epic:** EPIC 4: Matching engine  \n**Priority:** P0 · **Release:** v1 · **Size:** M\n\n*As a parent, I want to be matched automatically with a parent who wants the opposite move so that we can swap.*\n- **AC:**\n  - Given an active request A (X→Y) and an active request B (Y→X) in the same city and age group, when either is confirmed, then a `Match[Proposed]` with A and B is created within 5 s.\n  - Given the same requests but **different age groups**, no match is created.\n  - Given kindergartens X in Земун and Y in Нови Београд, a swap is found, because Belgrade is one city.\n  - A request is never in more than one open match.\n  - Two requests from the same email are never matched with each other.\n  - When several candidates exist, the oldest one wins (FIFO).\n\n---\n_Source: docs/user-stories.md · Architecture: docs/architecture.md_"
+    },
+    {
+      "id": "PS-041",
+      "title": "[PS-041] Chain matching (N-cycle, configurable)",
+      "epic": "EPIC 4: Matching engine",
+      "labels": [
+        "user-story",
+        "priority:P1",
+        "release:v1",
+        "size:L",
+        "epic:4"
+      ],
+      "milestone": "v1",
+      "body": "**Epic:** EPIC 4: Matching engine  \n**Priority:** P1 · **Release:** v1 · **Size:** L\n\n*As a parent, I want three or more families to be able to swap in a chain so that I can move even without a direct counterpart.*\n- **AC:**\n  - `Matching:MaxCycleLength` (2–6) is read from config.\n  - Given A: X→Y, B: Y→Z, C: Z→X, all in the same age group, and max length ≥ 3, then one match of size 3 is created. If any one of them is in a different age group, no match is created.\n  - Shorter cycles are preferred over longer ones.\n  - Cycle search is bounded and partitioned by city. It finishes in under 1 s for 10k active requests (benchmark test).\n\n---\n_Source: docs/user-stories.md · Architecture: docs/architecture.md_"
+    },
+    {
+      "id": "PS-042",
+      "title": "[PS-042] Atomic match reservation",
+      "epic": "EPIC 4: Matching engine",
+      "labels": [
+        "user-story",
+        "priority:P0",
+        "release:v1",
+        "size:M",
+        "epic:4"
+      ],
+      "milestone": "v1",
+      "body": "**Epic:** EPIC 4: Matching engine  \n**Priority:** P0 · **Release:** v1 · **Size:** M\n\n- **AC:** finding and reserving a cycle happens in one VeloxDB transaction. A concurrency test shows that confirming several requests in parallel never puts a request in two matches.\n\n---\n_Source: docs/user-stories.md · Architecture: docs/architecture.md_"
+    },
+    {
+      "id": "PS-043",
+      "title": "[PS-043] Periodic matching sweep",
+      "epic": "EPIC 4: Matching engine",
+      "labels": [
+        "user-story",
+        "priority:P1",
+        "release:v1",
+        "size:S",
+        "epic:4"
+      ],
+      "milestone": "v1",
+      "body": "**Epic:** EPIC 4: Matching engine  \n**Priority:** P1 · **Release:** v1 · **Size:** S\n\n- **AC:** a job runs hourly or on demand and re-evaluates all active unmatched requests. It picks up requests released after rejections, expiries, or config changes.\n\n---\n_Source: docs/user-stories.md · Architecture: docs/architecture.md_"
+    },
+    {
+      "id": "PS-044",
+      "title": "[PS-044] Matching domain library with tests",
+      "epic": "EPIC 4: Matching engine",
+      "labels": [
+        "user-story",
+        "priority:P0",
+        "release:v1",
+        "size:M",
+        "epic:4"
+      ],
+      "milestone": "v1",
+      "body": "**Epic:** EPIC 4: Matching engine  \n**Priority:** P0 · **Release:** v1 · **Size:** M\n\n- **AC:** the algorithm lives in `PremestiSe.Domain`, which has no dependency on the DB. It has unit tests for the 2-, 3-, and 4-cycle, no-match, self-match exclusion, FIFO, age-group isolation, and Belgrade cross-municipality cases, plus property-based tests showing every produced cycle is valid and has disjoint participants.\n\n---\n_Source: docs/user-stories.md · Architecture: docs/architecture.md_"
+    },
+    {
+      "id": "PS-050",
+      "title": "[PS-050] Match proposal email",
+      "epic": "EPIC 5: Match lifecycle & notifications",
+      "labels": [
+        "user-story",
+        "priority:P0",
+        "release:v1",
+        "size:M",
+        "epic:5"
+      ],
+      "milestone": "v1",
+      "body": "**Epic:** EPIC 5: Match lifecycle & notifications  \n**Priority:** P0 · **Release:** v1 · **Size:** M\n\n*As a matched parent, I want to be told that a swap is possible so that I can act.*\n- **AC:** each participant gets an email saying a swap was found, including the chain description (by kindergarten names only, no personal data yet), Accept/Decline links, and a deadline (72h by default).\n\n---\n_Source: docs/user-stories.md · Architecture: docs/architecture.md_"
+    },
+    {
+      "id": "PS-051",
+      "title": "[PS-051] Accept / decline a match (everyone must accept)",
+      "epic": "EPIC 5: Match lifecycle & notifications",
+      "labels": [
+        "user-story",
+        "priority:P0",
+        "release:v1",
+        "size:M",
+        "epic:5"
+      ],
+      "milestone": "v1",
+      "body": "**Epic:** EPIC 5: Match lifecycle & notifications  \n**Priority:** P0 · **Release:** v1 · **Size:** M\n\n*As a matched parent, I want a match to become final only when every participant has accepted, so that nobody is committed and no contact details are shared until everyone agrees.*\n- **AC:**\n  - A participant-scoped token opens the match page, which offers Accept or Decline. It shows how many participants have accepted (\"2 of 3 accepted\"), but not who they are.\n  - While at least one participant hasn't responded, the match stays `Proposed` and no contact details are shared with anyone.\n  - Only when **all** participants accept does the match become `Accepted` and trigger PS-052.\n  - When anyone declines, the match becomes `Rejected`, the other requests go back to `Active` and are re-matched, and the decliner's request goes back to `Active` (or is withdrawn, if they choose).\n  - When the deadline passes, the match becomes `Expired`. Non-responders' requests are paused and they get an email to reactivate. Everyone else goes back to `Active`.\n\n---\n_Source: docs/user-stories.md · Architecture: docs/architecture.md_"
+    },
+    {
+      "id": "PS-052",
+      "title": "[PS-052] Contact details exchange email",
+      "epic": "EPIC 5: Match lifecycle & notifications",
+      "labels": [
+        "user-story",
+        "priority:P0",
+        "release:v1",
+        "size:S",
+        "epic:5"
+      ],
+      "milestone": "v1",
+      "body": "**Epic:** EPIC 5: Match lifecycle & notifications  \n**Priority:** P0 · **Release:** v1 · **Size:** S\n\n*As a matched parent, I want the other participants' contact details and next steps so that we can go to the officials together.*\n- **AC:** sent only when the match is `Accepted`. It contains every participant's name, email, and phone, who moves where, and a short guide to the official transfer procedure at the PU.\n\n---\n_Source: docs/user-stories.md · Architecture: docs/architecture.md_"
+    },
+    {
+      "id": "PS-053",
+      "title": "[PS-053] Mark match completed",
+      "epic": "EPIC 5: Match lifecycle & notifications",
+      "labels": [
+        "user-story",
+        "priority:P1",
+        "release:v1",
+        "size:S",
+        "epic:5"
+      ],
+      "milestone": "v1",
+      "body": "**Epic:** EPIC 5: Match lifecycle & notifications  \n**Priority:** P1 · **Release:** v1 · **Size:** S\n\n- **AC:** any participant can mark \"Transfer done\". This sets the match to `Completed` and its requests to `Fulfilled`. A match auto-closes 30 days after `Accepted` if nobody reports. The match is anonymised according to the retention policy.\n\n---\n_Source: docs/user-stories.md · Architecture: docs/architecture.md_"
+    },
+    {
+      "id": "PS-054",
+      "title": "[PS-054] Transactional email outbox",
+      "epic": "EPIC 5: Match lifecycle & notifications",
+      "labels": [
+        "user-story",
+        "priority:P0",
+        "release:v1",
+        "size:M",
+        "epic:5"
+      ],
+      "milestone": "v1",
+      "body": "**Epic:** EPIC 5: Match lifecycle & notifications  \n**Priority:** P0 · **Release:** v1 · **Size:** M\n\n- **AC:** every email is written to `EmailOutbox` in the same transaction as the domain change. The worker sends with exponential backoff (max 8 attempts) and marks the row sent or failed. A failed email raises an alert.\n\n---\n_Source: docs/user-stories.md · Architecture: docs/architecture.md_"
+    },
+    {
+      "id": "PS-055",
+      "title": "[PS-055] Email templates & localization",
+      "epic": "EPIC 5: Match lifecycle & notifications",
+      "labels": [
+        "user-story",
+        "priority:P1",
+        "release:v1",
+        "size:M",
+        "epic:5"
+      ],
+      "milestone": "v1",
+      "body": "**Epic:** EPIC 5: Match lifecycle & notifications  \n**Priority:** P1 · **Release:** v1 · **Size:** M\n\n- **AC:** templates for confirm, already-registered, match proposal, match accepted, match rejected or expired, expiry reminder, and withdrawal confirmation. Each exists in sr-Cyrl, sr-Latn, and en, with HTML and text versions. The sending domain is set up with SPF/DKIM/DMARC.\n\n---\n_Source: docs/user-stories.md · Architecture: docs/architecture.md_"
+    },
+    {
+      "id": "PS-060",
+      "title": "[PS-060] Manage link & status page",
+      "epic": "EPIC 6: Manage my request",
+      "labels": [
+        "user-story",
+        "priority:P1",
+        "release:v1",
+        "size:M",
+        "epic:6"
+      ],
+      "milestone": "v1",
+      "body": "**Epic:** EPIC 6: Manage my request  \n**Priority:** P1 · **Release:** v1 · **Size:** M\n\n*As a parent, I want to see the status of my request so that I know whether there's a match.*\n- **AC:** the confirmation email and the success page include a manage link. The page shows the request details, the status (Active / Matched / …), and the open match, if any.\n\n---\n_Source: docs/user-stories.md · Architecture: docs/architecture.md_"
+    },
+    {
+      "id": "PS-061",
+      "title": "[PS-061] Edit request",
+      "epic": "EPIC 6: Manage my request",
+      "labels": [
+        "user-story",
+        "priority:P1",
+        "release:v1",
+        "size:S",
+        "epic:6"
+      ],
+      "milestone": "v1",
+      "body": "**Epic:** EPIC 6: Manage my request  \n**Priority:** P1 · **Release:** v1 · **Size:** S\n\n- **AC:** the parent can change the destination(s), phone, or age group while the request is `Active`. Editing triggers re-matching. Changing the email is not allowed (withdraw and re-submit instead).\n\n---\n_Source: docs/user-stories.md · Architecture: docs/architecture.md_"
+    },
+    {
+      "id": "PS-062",
+      "title": "[PS-062] Withdraw & delete my data",
+      "epic": "EPIC 6: Manage my request",
+      "labels": [
+        "user-story",
+        "priority:P0",
+        "release:v1",
+        "size:S",
+        "epic:6"
+      ],
+      "milestone": "v1",
+      "body": "**Epic:** EPIC 6: Manage my request  \n**Priority:** P0 · **Release:** v1 · **Size:** S\n\n*As a parent, I want to withdraw my request and delete my data so that I control my information.*\n- **AC:** withdrawing sets the request to `Withdrawn` and removes the parent from any open match, which is dissolved and its other participants go back to `Active` with an email. Personal data is erased or anonymised immediately (or within 30 days, by policy). A confirmation email is sent.\n\n---\n_Source: docs/user-stories.md · Architecture: docs/architecture.md_"
+    },
+    {
+      "id": "PS-063",
+      "title": "[PS-063] Request expiry & renewal",
+      "epic": "EPIC 6: Manage my request",
+      "labels": [
+        "user-story",
+        "priority:P1",
+        "release:v1",
+        "size:S",
+        "epic:6"
+      ],
+      "milestone": "v1",
+      "body": "**Epic:** EPIC 6: Manage my request  \n**Priority:** P1 · **Release:** v1 · **Size:** S\n\n- **AC:** active requests expire after 90 days (config). A reminder email goes out 7 days before with a one-click \"keep active\". Expired requests are excluded from matching and the map.\n\n---\n_Source: docs/user-stories.md · Architecture: docs/architecture.md_"
+    },
+    {
+      "id": "PS-070",
+      "title": "[PS-070] Aggregated map API",
+      "epic": "EPIC 7: Interactive map",
+      "labels": [
+        "user-story",
+        "priority:P0",
+        "release:v1",
+        "size:M",
+        "epic:7"
+      ],
+      "milestone": "v1",
+      "body": "**Epic:** EPIC 7: Interactive map  \n**Priority:** P0 · **Release:** v1 · **Size:** M\n\n- **AC:** `GET /api/cities/{id}/map?ageGroup=` (the age-group filter is optional) returns, per kindergarten, the id, name, lat/lng, number of active outgoing requests, number of incoming requests, and the top 3 destinations and sources. It contains **no personal data**, is cached for 1–5 minutes, and responds in under 300 ms at p95.\n\n---\n_Source: docs/user-stories.md · Architecture: docs/architecture.md_"
+    },
+    {
+      "id": "PS-071",
+      "title": "[PS-071] City map view",
+      "epic": "EPIC 7: Interactive map",
+      "labels": [
+        "user-story",
+        "priority:P0",
+        "release:v1",
+        "size:L",
+        "epic:7"
+      ],
+      "milestone": "v1",
+      "body": "**Epic:** EPIC 7: Interactive map  \n**Priority:** P0 · **Release:** v1 · **Size:** L\n\n*As a parent, I want to see on a map where other parents want to move so that I can spot possible swaps.*\n- **AC:**\n  - When a city is selected, a Leaflet map (OSM tiles) centres on it and shows markers for its kindergartens, clustered when zoomed out.\n  - Marker size or colour shows demand (outgoing vs incoming).\n  - An age-group filter shows only the demand relevant to the parent's group. When opened from the manage page, it defaults to the parent's group.\n  - Clicking a marker shows \"N want to leave / M want to join\", plus the top destinations and sources.\n  - The map is usable on mobile, and a list view is available as the accessible alternative.\n\n---\n_Source: docs/user-stories.md · Architecture: docs/architecture.md_"
+    },
+    {
+      "id": "PS-072",
+      "title": "[PS-072] Flow lines between kindergartens",
+      "epic": "EPIC 7: Interactive map",
+      "labels": [
+        "user-story",
+        "priority:P2",
+        "release:v1",
+        "size:M",
+        "epic:7"
+      ],
+      "milestone": "v1",
+      "body": "**Epic:** EPIC 7: Interactive map  \n**Priority:** P2 · **Release:** v1 · **Size:** M\n\n- **AC:** a toggle draws arrows between kindergartens for active demand, with thickness proportional to the count. Only kindergartens with at least 1 request are shown.\n\n---\n_Source: docs/user-stories.md · Architecture: docs/architecture.md_"
+    },
+    {
+      "id": "PS-073",
+      "title": "[PS-073] Start a request from the map",
+      "epic": "EPIC 7: Interactive map",
+      "labels": [
+        "user-story",
+        "priority:P1",
+        "release:v1",
+        "size:S",
+        "epic:7"
+      ],
+      "milestone": "v1",
+      "body": "**Epic:** EPIC 7: Interactive map  \n**Priority:** P1 · **Release:** v1 · **Size:** S\n\n- **AC:** the popup has \"I attend this kindergarten\" and \"I want this kindergarten\" buttons. Each opens the form with the field pre-filled.\n\n---\n_Source: docs/user-stories.md · Architecture: docs/architecture.md_"
+    },
+    {
+      "id": "PS-074",
+      "title": "[PS-074] Highlight my opportunity",
+      "epic": "EPIC 7: Interactive map",
+      "labels": [
+        "user-story",
+        "priority:P2",
+        "release:v2",
+        "size:M",
+        "epic:7"
+      ],
+      "milestone": "v2",
+      "body": "**Epic:** EPIC 7: Interactive map  \n**Priority:** P2 · **Release:** v2 · **Size:** M\n\n*As a parent with an active request, I want the map to highlight kindergartens that would complete a chain for me.*\n- **AC:** the manage page map highlights kindergartens where one more request would close a cycle that includes the parent.\n\n---\n_Source: docs/user-stories.md · Architecture: docs/architecture.md_"
+    },
+    {
+      "id": "PS-080",
+      "title": "[PS-080] App shell & routing",
+      "epic": "EPIC 8: Frontend shell, i18n, accessibility",
+      "labels": [
+        "user-story",
+        "priority:P0",
+        "release:v1",
+        "size:M",
+        "epic:8"
+      ],
+      "milestone": "v1",
+      "body": "**Epic:** EPIC 8: Frontend shell, i18n, accessibility  \n**Priority:** P0 · **Release:** v1 · **Size:** M\n\n- **AC:** routes for Home (map and CTA), New request, Confirm, Manage, Match, Privacy, and FAQ. Responsive and mobile-first. Errors from the API's `ProblemDetails` are shown in a consistent way.\n\n---\n_Source: docs/user-stories.md · Architecture: docs/architecture.md_"
+    },
+    {
+      "id": "PS-081",
+      "title": "[PS-081] Localization (sr-Cyrl / sr-Latn / en)",
+      "epic": "EPIC 8: Frontend shell, i18n, accessibility",
+      "labels": [
+        "user-story",
+        "priority:P1",
+        "release:v1",
+        "size:M",
+        "epic:8"
+      ],
+      "milestone": "v1",
+      "body": "**Epic:** EPIC 8: Frontend shell, i18n, accessibility  \n**Priority:** P1 · **Release:** v1 · **Size:** M\n\n- **AC:** a language switcher that remembers the choice. Every UI string is in i18n files. Kindergarten names are shown in the selected script.\n\n---\n_Source: docs/user-stories.md · Architecture: docs/architecture.md_"
+    },
+    {
+      "id": "PS-082",
+      "title": "[PS-082] Accessibility (WCAG 2.1 AA)",
+      "epic": "EPIC 8: Frontend shell, i18n, accessibility",
+      "labels": [
+        "user-story",
+        "priority:P1",
+        "release:v1",
+        "size:M",
+        "epic:8"
+      ],
+      "milestone": "v1",
+      "body": "**Epic:** EPIC 8: Frontend shell, i18n, accessibility  \n**Priority:** P1 · **Release:** v1 · **Size:** M\n\n- **AC:** keyboard navigation works, form labels and errors are announced, colour contrast meets AA, the map has a list alternative, and an axe check runs in CI.\n\n---\n_Source: docs/user-stories.md · Architecture: docs/architecture.md_"
+    },
+    {
+      "id": "PS-083",
+      "title": "[PS-083] Landing page, FAQ & how-it-works",
+      "epic": "EPIC 8: Frontend shell, i18n, accessibility",
+      "labels": [
+        "user-story",
+        "priority:P1",
+        "release:v1",
+        "size:S",
+        "epic:8"
+      ],
+      "milestone": "v1",
+      "body": "**Epic:** EPIC 8: Frontend shell, i18n, accessibility  \n**Priority:** P1 · **Release:** v1 · **Size:** S\n\n- **AC:** explains how the swap works, that the platform doesn't perform the transfer, the official steps at the PU, and privacy.\n\n---\n_Source: docs/user-stories.md · Architecture: docs/architecture.md_"
+    },
+    {
+      "id": "PS-090",
+      "title": "[PS-090] Privacy policy & data retention jobs",
+      "epic": "EPIC 9: Security, privacy & compliance",
+      "labels": [
+        "user-story",
+        "priority:P0",
+        "release:v1",
+        "size:M",
+        "epic:9"
+      ],
+      "milestone": "v1",
+      "body": "**Epic:** EPIC 9: Security, privacy & compliance  \n**Priority:** P0 · **Release:** v1 · **Size:** M\n\n- **AC:** a privacy policy page (ZZPL-compliant, reviewed by legal). Scheduled jobs apply retention: pending requests after 24h, withdrawn or expired requests anonymised after 30 days, completed matches anonymised after 90 days.\n\n---\n_Source: docs/user-stories.md · Architecture: docs/architecture.md_"
+    },
+    {
+      "id": "PS-091",
+      "title": "[PS-091] Token service",
+      "epic": "EPIC 9: Security, privacy & compliance",
+      "labels": [
+        "user-story",
+        "priority:P0",
+        "release:v1",
+        "size:M",
+        "epic:9"
+      ],
+      "milestone": "v1",
+      "body": "**Epic:** EPIC 9: Security, privacy & compliance  \n**Priority:** P0 · **Release:** v1 · **Size:** M\n\n- **AC:** separate token types (confirm, manage, match-participant), each with its own expiry. Tokens are stored as SHA-256 hashes and compared in constant time. Manage and match tokens can be revoked.\n\n---\n_Source: docs/user-stories.md · Architecture: docs/architecture.md_"
+    },
+    {
+      "id": "PS-092",
+      "title": "[PS-092] Security hardening",
+      "epic": "EPIC 9: Security, privacy & compliance",
+      "labels": [
+        "user-story",
+        "priority:P1",
+        "release:v1",
+        "size:M",
+        "epic:9"
+      ],
+      "milestone": "v1",
+      "body": "**Epic:** EPIC 9: Security, privacy & compliance  \n**Priority:** P1 · **Release:** v1 · **Size:** M\n\n- **AC:** HTTPS with HSTS, CSP, CORS restricted to the SPA origin, and security headers. Dependency scanning runs in CI. An OWASP ZAP baseline scan runs on staging.\n\n---\n_Source: docs/user-stories.md · Architecture: docs/architecture.md_"
+    },
+    {
+      "id": "PS-093",
+      "title": "[PS-093] Audit log",
+      "epic": "EPIC 9: Security, privacy & compliance",
+      "labels": [
+        "user-story",
+        "priority:P1",
+        "release:v1",
+        "size:S",
+        "epic:9"
+      ],
+      "milestone": "v1",
+      "body": "**Epic:** EPIC 9: Security, privacy & compliance  \n**Priority:** P1 · **Release:** v1 · **Size:** S\n\n- **AC:** request confirmed, match created, decision, withdrawal, and erasure events are logged with the time, the actor (by token type), and the entity, with no unnecessary personal data.\n\n---\n_Source: docs/user-stories.md · Architecture: docs/architecture.md_"
+    },
+    {
+      "id": "PS-100",
+      "title": "[PS-100] Admin CLI",
+      "epic": "EPIC 10: Operations / admin",
+      "labels": [
+        "user-story",
+        "priority:P1",
+        "release:v1",
+        "size:M",
+        "epic:10"
+      ],
+      "milestone": "v1",
+      "body": "**Epic:** EPIC 10: Operations / admin  \n**Priority:** P1 · **Release:** v1 · **Size:** M\n\n*As an operator, I want basic admin commands so that I can maintain data and handle abuse.*\n- **AC:** commands to re-import kindergartens, deactivate a kindergarten, look up a request by email, remove a request (abuse), re-run matching, and show stats (requests per city, matches, conversion).\n\n---\n_Source: docs/user-stories.md · Architecture: docs/architecture.md_"
+    },
+    {
+      "id": "PS-101",
+      "title": "[PS-101] Operator dashboard (read-only)",
+      "epic": "EPIC 10: Operations / admin",
+      "labels": [
+        "user-story",
+        "priority:P2",
+        "release:v2",
+        "size:M",
+        "epic:10"
+      ],
+      "milestone": "v2",
+      "body": "**Epic:** EPIC 10: Operations / admin  \n**Priority:** P2 · **Release:** v2 · **Size:** M\n\n- **AC:** a web page behind SSO showing KPIs: active requests, matches proposed, accepted, and completed, median time to match, and email bounce rate.\n\n---\n_Source: docs/user-stories.md · Architecture: docs/architecture.md_"
+    }
+  ]
+}
