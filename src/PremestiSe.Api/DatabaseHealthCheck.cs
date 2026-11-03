@@ -7,7 +7,7 @@ namespace PremestiSe.Api;
 
 public sealed class DatabaseHealthCheck : IHealthCheck
 {
-    private readonly IConnectivityApi database;
+    private readonly Func<Task> execute;
     private readonly TimeSpan timeout;
 
     public DatabaseHealthCheck(IOptions<DatabaseOptions> options)
@@ -20,7 +20,14 @@ public sealed class DatabaseHealthCheck : IHealthCheck
             PoolSize = 1
         };
         connection.AddAddress(options.Value.Address);
-        database = ConnectionFactory.Get<IConnectivityApi>(connection.GenerateConnectionString());
+        var database = ConnectionFactory.Get<IConnectivityApi>(connection.GenerateConnectionString());
+        execute = async () => _ = await database.Check();
+    }
+
+    internal DatabaseHealthCheck(Func<Task> execute, TimeSpan timeout)
+    {
+        this.execute = execute;
+        this.timeout = timeout;
     }
 
     public async Task<HealthCheckResult> CheckHealthAsync(
@@ -30,7 +37,7 @@ public sealed class DatabaseHealthCheck : IHealthCheck
         {
             // VeloxDB's awaitable has no cancellation API. Bound the HTTP wait as well
             // as its connection/retry budgets; observe any later protocol failure.
-            var operation = ExecuteAsync();
+            var operation = execute();
             await operation.WaitAsync(timeout, cancellationToken);
             return HealthCheckResult.Healthy();
         }
@@ -40,6 +47,4 @@ public sealed class DatabaseHealthCheck : IHealthCheck
             return HealthCheckResult.Unhealthy("Database unavailable.");
         }
     }
-
-    private async Task ExecuteAsync() => _ = await database.Check();
 }
