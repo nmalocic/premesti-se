@@ -1,0 +1,7 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup><OutputType>Exe</OutputType></PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../PremestiSe.Domain/PremestiSe.Domain.csproj" />
+    <ProjectReference Include="../PremestiSe.Db.Contracts/PremestiSe.Db.Contracts.csproj" />
+  </ItemGroup>
+</Project>
