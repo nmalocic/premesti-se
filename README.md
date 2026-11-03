@@ -51,6 +51,7 @@ development database data**. After source changes, use `docker compose up --buil
 - `src/PremestiSe.Importer`: buildable console entry point for future import work.
 - `tests/PremestiSe.Domain.Tests`: ready for domain tests when logic is introduced.
 - `tests/PremestiSe.Api.Tests`: real-stack HTTP, database protocol, and SMTP checks.
+- `tests/PremestiSe.Api.UnitTests`: isolated database-health behavior tests.
 - `web`: React 18 + Vite + TypeScript starter and Playwright smoke tests.
 - `deploy`: Dockerfiles, VeloxDB configuration, and verification script.
 
@@ -122,6 +123,10 @@ SMTP_PORT=1025
 
 ## Build and verify
 
+GitHub Actions builds and checks both applications on every pull request and on
+pushes to `main`. See the [CI guide](docs/ci.md) for service-independent unit tests,
+format/lint commands, downloadable artifacts, and required merge protection.
+
 With the full stack running, host SDK commands are:
 
 ```sh
@@ -138,7 +143,8 @@ docker run --rm --network premesti-se_default -v "$PWD:/workspace" -w /workspace
 ```
 
 The domain suite is intentionally empty; its test runner reports no tests until
-domain behavior is added. API tests require the actual running Compose stack.
+domain behavior is added. `PremestiSe.Api.Tests` requires the actual running Compose
+stack; `PremestiSe.Api.UnitTests` runs without services and is the CI unit suite.
 Defaults target the standard host ports; override `API_URL`, `DATABASE_ADDRESS`,
 and `SMTP_HOST` if running tests against different addresses.
 
@@ -166,5 +172,5 @@ npx playwright install --with-deps chromium
 npm run test:e2e
 ```
 
-Set `APP_URL` for a nondefault browser target. No CI or production deployment is
-included in this foundation story.
+Set `APP_URL` for a nondefault browser target. CI artifact publication is described
+in the [CI guide](docs/ci.md); production deployment remains a separate story.

@@ -12,9 +12,16 @@ export function App() {
     setState('loading');
     async function check() {
       try {
-        const response = await fetch('/api/health', { signal: controller.signal, cache: 'no-store' });
+        const response = await fetch('/api/health', {
+          signal: controller.signal,
+          cache: 'no-store',
+        });
         const health = await response.json();
-        if (!response.ok || health.status !== 'Healthy' || health.checks?.database?.status !== 'Healthy') {
+        if (
+          !response.ok ||
+          health.status !== 'Healthy' ||
+          health.checks?.database?.status !== 'Healthy'
+        ) {
           throw new Error('Unavailable');
         }
         setState('healthy');
@@ -26,7 +33,11 @@ export function App() {
     }
     let disposed = false;
     void check();
-    return () => { disposed = true; clearTimeout(timeout); controller.abort(); };
+    return () => {
+      disposed = true;
+      clearTimeout(timeout);
+      controller.abort();
+    };
   }, [attempt]);
 
   return (
@@ -39,9 +50,15 @@ export function App() {
         <p role="status" aria-live="polite">
           {state === 'loading' && 'Checking API and database…'}
           {state === 'healthy' && 'API and VeloxDB are healthy.'}
-          {state === 'unavailable' && 'API or database unavailable. Please try again.'}
+          {state === 'unavailable' &&
+            'API or database unavailable. Please try again.'}
         </p>
-        <button onClick={() => setAttempt(a => a + 1)} disabled={state === 'loading'}>Check again</button>
+        <button
+          onClick={() => setAttempt((a) => a + 1)}
+          disabled={state === 'loading'}
+        >
+          Check again
+        </button>
       </section>
     </main>
   );
