@@ -160,9 +160,11 @@ Local command success and workflow inspection do not replace this hosted proof.
 
 ### Implementation access status
 
-On 2026-11-03 the implementation runner reported `admin: false` and `push: false`;
-reading `main` protection returned HTTP 403 and the visible ruleset list was empty.
-Hosted execution and merge enforcement therefore require an authorized contributor
-and administrator. **PS-002 is not fully accepted until hosted runs/artifact
+On 2026-11-03 repository metadata reported `admin: false` and `push: false`, but
+Git transport successfully published the implementation branch `ps-002-ci-pipeline`.
+Reading `main` protection still returned HTTP 403 and the visible ruleset list was
+empty. Hosted execution awaits the automation-created PR; branch pushes other than
+`main` do not trigger this workflow. An administrator must apply/read back merge
+protection. **PS-002 is not fully accepted until hosted runs/artifact
 downloads and administrator read-back plus failing-PR merge refusal are recorded.**
 The full merge-blocking requirement in `docs/user-stories.md` remains unchanged.
